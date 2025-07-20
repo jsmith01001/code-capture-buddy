@@ -11,16 +11,20 @@ import { toast } from "sonner";
 import { Loader2, Crown, ShoppingBag, Package } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-interface Profile {
+type Profile = {
   id: string;
-  full_name: string;
-  phone: string;
-  address: string;
-  bio: string;
-  avatar_url: string;
-  total_purchases: number;
-  total_sales: number;
-  last_active: string;
+  user_id: string;
+  full_name: string | null;
+  email: string | null;
+  phone: string | null;
+  address: string | null;
+  bio: string | null;
+  avatar_url: string | null;
+  total_purchases: number | null;
+  total_sales: number | null;
+  last_active: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 interface Subscription {

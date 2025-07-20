@@ -14,18 +14,23 @@ import { supabase } from "@/integrations/supabase/client";
 interface Product {
   id: string;
   name: string;
-  description: string;
+  description: string | null;
   price: number;
-  image_url: string;
-  category_id: string;
-  stock_quantity: number;
-  is_active: boolean;
+  image_url: string | null;
+  category_id: string | null;
+  stock_quantity: number | null;
+  seller_id: string;
+  is_active: boolean | null;
   created_at: string;
+  updated_at: string;
 }
 
 interface Category {
   id: string;
   name: string;
+  description: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 const SellerDashboard = () => {
@@ -150,12 +155,12 @@ const SellerDashboard = () => {
   const handleEdit = (product: Product) => {
     setFormData({
       name: product.name,
-      description: product.description,
+      description: product.description || '',
       price: product.price.toString(),
       image_url: product.image_url || '',
       category_id: product.category_id || '',
-      stock_quantity: product.stock_quantity.toString(),
-      is_active: product.is_active
+      stock_quantity: (product.stock_quantity || 0).toString(),
+      is_active: product.is_active ?? true
     });
     setEditingProduct(product);
     setShowAddProduct(true);
@@ -229,7 +234,7 @@ const SellerDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                ${products.reduce((total, product) => total + (product.price * product.stock_quantity), 0).toFixed(2)}
+                ${products.reduce((total, product) => total + (product.price * (product.stock_quantity || 0)), 0).toFixed(2)}
               </div>
             </CardContent>
           </Card>
