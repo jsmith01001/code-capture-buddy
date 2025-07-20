@@ -4,10 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import ProductCard from '@/components/product/ProductCard';
+import UsersList from '@/components/UsersList';
+import { useAuth } from '@/contexts/AuthContext';
 import { ArrowRight, Leaf, Shield, Truck, Star, Users } from 'lucide-react';
 import { products, categories } from '@/data/mockData';
 
 const Home = () => {
+  const { user } = useAuth();
   const featuredProducts = products.slice(0, 8);
   const featuredCategories = categories.slice(0, 6);
 
@@ -219,28 +222,41 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* Real-time Users Section */}
       <section className="py-16">
         <div className="container mx-auto px-4">
-          <Card className="gradient-primary text-white p-8 md:p-12 text-center">
-            <CardContent className="space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold">
-                Ready to Start Farming?
-              </h2>
-              <p className="text-lg opacity-90 max-w-2xl mx-auto">
-                Join thousands of successful farmers who trust Sokovuma for their agricultural needs. 
-                Get started today and see the difference quality makes.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" variant="secondary">
-                  <Link to="/auth">Create Account</Link>
-                </Button>
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
-                  <Link to="/contact">Contact Us</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <Card className="gradient-primary text-white p-8 md:p-12 text-center">
+                <CardContent className="space-y-6">
+                  <h2 className="text-3xl md:text-4xl font-bold">
+                    Ready to Start Farming?
+                  </h2>
+                  <p className="text-lg opacity-90 max-w-2xl mx-auto">
+                    Join thousands of successful farmers who trust Sokovuma for their agricultural needs. 
+                    Get started today and see the difference quality makes.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    {!user ? (
+                      <Button size="lg" variant="secondary">
+                        <Link to="/auth">Create Account</Link>
+                      </Button>
+                    ) : (
+                      <Button size="lg" variant="secondary">
+                        <Link to="/profile">View Profile</Link>
+                      </Button>
+                    )}
+                    <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+                      <Link to="/contact">Contact Us</Link>
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="lg:col-span-1">
+              <UsersList />
+            </div>
+          </div>
         </div>
       </section>
     </div>
