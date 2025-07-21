@@ -64,6 +64,9 @@ const Navbar = () => {
             <Link to="/categories" className="text-sm font-medium hover:text-primary transition-colors">
               Categories
             </Link>
+            <Link to="/seller-certification" className="text-sm font-medium hover:text-primary transition-colors">
+              Become a Seller
+            </Link>
             
             {/* Cart */}
             <Link to="/cart" className="relative">
@@ -157,6 +160,13 @@ const Navbar = () => {
                   onClick={() => setIsOpen(false)}
                 >
                   Categories
+                </Link>
+                <Link
+                  to="/seller-certification"
+                  className="text-sm font-medium hover:text-primary transition-colors py-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Become a Seller
                 </Link>
                 <Link
                   to="/cart"

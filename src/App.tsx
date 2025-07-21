@@ -12,6 +12,9 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Profile from "./pages/Profile";
 import SellerDashboard from "./pages/SellerDashboard";
+import SellerCertification from "./pages/SellerCertification";
+import Categories from "./pages/Categories";
+import AdminDashboard from "./pages/AdminDashboard";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
@@ -34,6 +37,9 @@ const App = () => (
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/seller-dashboard" element={<SellerDashboard />} />
+                  <Route path="/seller-certification" element={<SellerCertification />} />
+                  <Route path="/categories" element={<Categories />} />
+                  <Route path="/admin" element={<AdminDashboard />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>

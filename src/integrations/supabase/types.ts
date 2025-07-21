@@ -136,6 +136,87 @@ export type Database = {
         }
         Relationships: []
       }
+      seller_requests: {
+        Row: {
+          business_registration_number: string | null
+          created_at: string
+          full_name: string
+          government_id_url: string
+          id: string
+          payment_details: Json
+          payment_method: string
+          phone_number: string | null
+          physical_location: string
+          product_categories: string[]
+          profile_photo_url: string | null
+          rejection_reason: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          selfie_url: string | null
+          status: string
+          store_description: string
+          store_name: string
+          terms_accepted: boolean
+          terms_accepted_at: string | null
+          updated_at: string
+          user_id: string
+          verified_email: boolean | null
+          verified_phone: boolean | null
+        }
+        Insert: {
+          business_registration_number?: string | null
+          created_at?: string
+          full_name: string
+          government_id_url: string
+          id?: string
+          payment_details: Json
+          payment_method: string
+          phone_number?: string | null
+          physical_location: string
+          product_categories: string[]
+          profile_photo_url?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          selfie_url?: string | null
+          status?: string
+          store_description: string
+          store_name: string
+          terms_accepted?: boolean
+          terms_accepted_at?: string | null
+          updated_at?: string
+          user_id: string
+          verified_email?: boolean | null
+          verified_phone?: boolean | null
+        }
+        Update: {
+          business_registration_number?: string | null
+          created_at?: string
+          full_name?: string
+          government_id_url?: string
+          id?: string
+          payment_details?: Json
+          payment_method?: string
+          phone_number?: string | null
+          physical_location?: string
+          product_categories?: string[]
+          profile_photo_url?: string | null
+          rejection_reason?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          selfie_url?: string | null
+          status?: string
+          store_description?: string
+          store_name?: string
+          terms_accepted?: boolean
+          terms_accepted_at?: string | null
+          updated_at?: string
+          user_id?: string
+          verified_email?: boolean | null
+          verified_phone?: boolean | null
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           created_at: string
