@@ -21,7 +21,7 @@ interface PaymentDetails {
 }
 
 const SellerCertification = () => {
-  const { user } = useAuth();
+  const { user, isLoading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
@@ -49,13 +49,18 @@ const SellerCertification = () => {
   });
 
   useEffect(() => {
-    if (user) {
+    console.log('SellerCertification useEffect - user:', user, 'authLoading:', authLoading);
+    if (user && !authLoading) {
       fetchExistingRequest();
       fetchCategories();
+    } else if (!authLoading && !user) {
+      // Not authenticated and auth is done loading
+      setLoading(false);
     }
-  }, [user]);
+  }, [user, authLoading]);
 
   const fetchExistingRequest = async () => {
+    console.log('Fetching existing request for user:', user?.id);
     try {
       const { data, error } = await supabase
         .from('seller_requests')
@@ -88,6 +93,7 @@ const SellerCertification = () => {
   };
 
   const fetchCategories = async () => {
+    console.log('Fetching categories...');
     try {
       const { data, error } = await supabase
         .from('categories')
@@ -213,7 +219,7 @@ const SellerCertification = () => {
     }
   };
 
-  if (loading) {
+  if (loading || authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin" />
