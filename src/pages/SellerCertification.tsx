@@ -11,35 +11,22 @@ import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 import { Loader2, Upload, FileCheck, User, Building, CreditCard, Shield, CheckCircle, XCircle, Clock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
-interface SellerRequest {
-  id: string;
-  status: string;
-  full_name: string;
-  profile_photo_url: string | null;
-  verified_email: boolean;
-  verified_phone: boolean;
-  phone_number: string | null;
-  physical_location: string;
-  government_id_url: string;
-  selfie_url: string | null;
-  store_name: string;
-  store_description: string;
-  business_registration_number: string | null;
-  product_categories: string[];
-  payment_method: string;
-  payment_details: any;
-  terms_accepted: boolean;
-  rejection_reason: string | null;
-  created_at: string;
+interface PaymentDetails {
+  mpesa_number?: string;
+  paypal_email?: string;
+  bank_name?: string;
+  account_number?: string;
 }
 
 const SellerCertification = () => {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [uploading, setUploading] = useState(false);
-  const [existingRequest, setExistingRequest] = useState<SellerRequest | null>(null);
+  const [existingRequest, setExistingRequest] = useState<any>(null);
   const [categories, setCategories] = useState<any[]>([]);
 
   const [formData, setFormData] = useState({
@@ -51,7 +38,7 @@ const SellerCertification = () => {
     business_registration_number: '',
     product_categories: [] as string[],
     payment_method: '',
-    payment_details: {},
+    payment_details: {} as PaymentDetails,
     terms_accepted: false
   });
 
@@ -89,7 +76,7 @@ const SellerCertification = () => {
           business_registration_number: data.business_registration_number || '',
           product_categories: data.product_categories,
           payment_method: data.payment_method,
-          payment_details: data.payment_details,
+          payment_details: (data.payment_details as PaymentDetails) || {},
           terms_accepted: data.terms_accepted
         });
       }
@@ -180,7 +167,7 @@ const SellerCertification = () => {
         business_registration_number: formData.business_registration_number,
         product_categories: formData.product_categories,
         payment_method: formData.payment_method,
-        payment_details: formData.payment_details,
+        payment_details: formData.payment_details as any,
         terms_accepted: formData.terms_accepted,
         terms_accepted_at: new Date().toISOString(),
         status: 'pending'
@@ -462,6 +449,7 @@ const SellerCertification = () => {
                     <Input
                       id="mpesa_number"
                       placeholder="254xxxxxxxxx"
+                      value={formData.payment_details?.mpesa_number || ''}
                       onChange={(e) => setFormData(prev => ({ 
                         ...prev, 
                         payment_details: { mpesa_number: e.target.value }
@@ -476,6 +464,7 @@ const SellerCertification = () => {
                     <Input
                       id="paypal_email"
                       type="email"
+                      value={formData.payment_details?.paypal_email || ''}
                       onChange={(e) => setFormData(prev => ({ 
                         ...prev, 
                         payment_details: { paypal_email: e.target.value }
@@ -490,6 +479,7 @@ const SellerCertification = () => {
                       <Label htmlFor="bank_name">Bank Name</Label>
                       <Input
                         id="bank_name"
+                        value={formData.payment_details?.bank_name || ''}
                         onChange={(e) => setFormData(prev => ({ 
                           ...prev, 
                           payment_details: { 
@@ -503,6 +493,7 @@ const SellerCertification = () => {
                       <Label htmlFor="account_number">Account Number</Label>
                       <Input
                         id="account_number"
+                        value={formData.payment_details?.account_number || ''}
                         onChange={(e) => setFormData(prev => ({ 
                           ...prev, 
                           payment_details: { 
@@ -549,13 +540,13 @@ const SellerCertification = () => {
         {existingRequest && existingRequest.status === 'approved' && (
           <Card>
             <CardContent className="text-center py-8">
-              <CheckCircle className="h-16 w-16 mx-auto mb-4 text-green-500" />
+              <CheckCircle className="h-16 w-16 mx-auto mb-4 text-primary" />
               <h2 className="text-2xl font-bold mb-2">Congratulations!</h2>
               <p className="text-muted-foreground mb-4">
                 Your seller certification has been approved. You can now start selling on the platform.
               </p>
-              <Button asChild>
-                <a href="/seller-dashboard">Go to Seller Dashboard</a>
+              <Button onClick={() => navigate('/seller-dashboard')}>
+                Go to Seller Dashboard
               </Button>
             </CardContent>
           </Card>
