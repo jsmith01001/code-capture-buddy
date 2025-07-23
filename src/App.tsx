@@ -20,6 +20,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import CategoryPage from "./pages/CategoryPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ const App = () => (
                   <Route path="/seller-dashboard" element={<SellerDashboard />} />
                   <Route path="/seller-certification" element={<SellerCertification />} />
                   <Route path="/categories" element={<Categories />} />
+                  <Route path="/categories/:categorySlug" element={<CategoryPage />} />
                   <Route path="/admin" element={<AdminDashboard />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/about" element={<About />} />
