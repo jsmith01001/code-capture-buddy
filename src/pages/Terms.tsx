@@ -183,8 +183,8 @@ const Terms = () => {
                 </p>
                 <div className="mt-4 text-muted-foreground">
                   <p>Email: legal@sokovuma.com</p>
-                  <p>Phone: +1 (555) 123-4567</p>
-                  <p>Address: 123 Farm Road, Agriculture City</p>
+                  <p>Phone: 0726 693 919</p>
+                  <p>Address: Nairobi Kenya</p>
                 </div>
               </CardContent>
             </Card>
