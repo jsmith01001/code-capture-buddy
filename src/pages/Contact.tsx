@@ -131,7 +131,7 @@ const Contact = () => {
                   <Phone className="h-5 w-5 text-primary" />
                   <div>
                     <p className="font-medium">Phone</p>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">0726 693 919</p>
                   </div>
                 </div>
                 
@@ -139,7 +139,7 @@ const Contact = () => {
                   <MapPin className="h-5 w-5 text-primary" />
                   <div>
                     <p className="font-medium">Address</p>
-                    <p className="text-muted-foreground">123 Farm Road, Agriculture City</p>
+                    <p className="text-muted-foreground">Nairobi Kenya</p>
                   </div>
                 </div>
                 
